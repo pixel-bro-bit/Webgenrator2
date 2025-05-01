@@ -36,32 +36,31 @@ def generate_personal_website():
     # --- Skills ---
     st.header("Skills")
     skills = st.text_area("Skills (comma-separated)", "Python, JavaScript, SQL, Machine Learning, Web Development").split(",")
-    skills = [skill.strip() for skill in skills] # Remove leading/trailing spaces
+    skills = [skill.strip() for skill in skills]  # Remove any leading/trailing whitespace
+# --- Education ---
+st.header("Education")
+educations = []
+num_education = st.number_input("Number of Education entries", 1, 3, 1)
+for i in range(num_education):
+    st.subheader(f"Education {i + 1}")
+    institution_name = st.text_input(f"Institution Name {i + 1}", "University Name")
+    degree = st.text_input(f"Degree {i + 1}", "Degree")
+    major = st.text_input(f"Major {i + 1}", "Major")
+    start_date = st.text_input(f"Start Date {i + 1}", "YYYY-MM")
+    end_date = st.text_input(f"End Date {i + 1}", "YYYY-MM")
+    educations.append({
+        "institution": institution_name,
+        "degree": degree,
+        "major": major,
+        "start_date": start_date,
+        "end_date": end_date,
+    })
 
-    # --- Education ---
-    st.header("Education")
-    educations = []
-    num_education = st.number_input("Number of Education entries", 1, 3, 1)
-    for i in range(num_education):
-        st.subheader(f"Education {i + 1}")
-        institution_name = st.text_input(f"Institution Name {i + 1}", "University Name")
-        degree = st.text_input(f"Degree {i + 1}", "Degree")
-        major = st.text_input(f"Major {i + 1}", "Major")
-        start_date = st.text_input(f"Start Date {i + 1}", "YYYY-MM")
-        end_date = st.text_input(f"End Date {i + 1}", "YYYY-MM")
-        educations.append((institution_name, degree, major, start_date, end_date))
-        educations.append({
-            "institution": institution_name,
-            "degree": degree,
-            "major": major,
-            "start_date": start_date,
-            "end_date": end_date,
-        })
-                    
+# ...existing code...
 
-    # --- Generate Website ---
-    if st.button("Generate Website"):
-        _display_website(name, tagline, about_me, image_url, email, linkedin, github, twitter, projects, skills, educations)
+# --- Generate Website ---
+if st.button("Generate Website"):
+_display_website(name, tagline, about_me, image_url, email, linkedin, github, twitter, projects, skills, educations)
 
 def _display_website(name, tagline, about_me, image_url, email, linkedin, github, twitter, projects, skills, educations):
     """
